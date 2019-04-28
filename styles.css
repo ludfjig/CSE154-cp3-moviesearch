@@ -1,20 +1,30 @@
-body{
+/* add name fix redundancy */
+
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+body {
   background-color: black;
   width: 60%;
   margin-left: auto;
   margin-right: auto;
   color: white;
-  font-family:  monospace;
 }
 
-section{
+body, button, input {
+  font-family: Raleway;
+}
+
+body, button {
+  color: white;
+}
+
+section {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-div{
+div {
   width: 200px;
   padding: 10px;
   background-color: gray;
@@ -28,26 +38,53 @@ div{
 img {
   width: 80%;
   height: auto;
+  border-radius: 5px;
+
 }
 
-h1,h2{
+h1, h2 {
   text-align: center;
 }
-section{
+
+section {
   margin-top: 50px;
 }
+
 nav {
   background-color: gray;
-  height: 50px;;
+  height: 50px;
+  ;
   padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
+
+nav, div {
+  border: 5px solid white;
+  border-radius: 10px;
+}
+
 h3 {
-  text-decoration:underline;
+  text-decoration: underline;
   text-shadow: 1px 1px 4px black;
   font-size: 16pt;
 }
 
-p{
+button {
+  background-color: #ff3030;
+  border: 0;
+  border-bottom: 5px solid #942b2b;
+  border-radius: 3px;
+  width: 80px;
+  height: 40px;
+}
+
+button:active {
+  background-color: #ffb2b2;
+}
+
+p {
   padding-left: 20px;
   padding-right: 20px;
   max-height: 200px;
