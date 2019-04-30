@@ -31,7 +31,7 @@
   function search() {
     //removes old movies
     let section = qs("section");
-    while(section.firstChild){
+    while (section.firstChild) {
       section.firstChild.remove();
     }
 
@@ -41,11 +41,12 @@
     fetch(url)
       .then(checkStatus)
       .then(JSON.parse)
-      .then(createMovieCards);
-      // .catch(function (err){
-      //   console.log("error");
-      //   // fix this
-      // });
+      .then(createMovieCards)
+      .then(updateCount);
+    // .catch(function (err){
+    //   console.log("error");
+    //   // fix this
+    // });
   }
 
   /**
@@ -55,22 +56,32 @@
    */
   function createMovieCards(jsonResponse) {
     let movies = jsonResponse.results;
-    for(let i = 0; i < movies.length; i++){
+    console.log(movies);
+    for (let i = 0; i < movies.length; i++) {
       let movie = document.createElement("div");
       let title = document.createElement("h3");
       let poster = document.createElement("img");
       let desc = document.createElement("p");
+      let rating = document.createElement("h4");
 
       title.innerText = movies[i].title;
       desc.innerText = movies[i].overview;
-      poster.src = POSTER_URL+movies[i].poster_path;
-
-      movie.appendChild(poster);
+      rating.innerText = "Rating: " + movies[i].vote_average + " (of " + movies[i].vote_count + " total votes";
+      if (movies[i].poster_path != null) {
+        poster.src = POSTER_URL + movies[i].poster_path;
+        poster.alt = "Movie poster for " + title;
+        movie.appendChild(poster);
+      }
       movie.appendChild(title);
+      movie.appendChild(rating);
       movie.appendChild(desc);
       qs("section").appendChild(movie);
     }
-    console.log(movies.length);
+    return movies.length;
+  }
+
+  function updateCount(n) {
+    qs("h2").innerText = "Results: " + n;
   }
 
   /* ------------------------------ Helper Functions  ------------------------------ */
@@ -78,19 +89,19 @@
   // any functions defined that are unused.
 
   /**
-     * Helper function to return the response's result text if successful, otherwise
-     * returns the rejected Promise result with an error status and corresponding text
-     * @param {object} response - response to check for success/error
-     * @returns {object} - valid result text if response was successful, otherwise rejected
-     *                     Promise result
-     */
-    function checkStatus(response) {
-      if (response.status >= 200 && response.status < 300) {
-        return response.text();
-      } else {
-        return Promise.reject(new Error(response.status + ": " + response.statusText));
-      }
+   * Helper function to return the response's result text if successful, otherwise
+   * returns the rejected Promise result with an error status and corresponding text
+   * @param {object} response - response to check for success/error
+   * @returns {object} - valid result text if response was successful, otherwise rejected
+   *                     Promise result
+   */
+  function checkStatus(response) {
+    if (response.status >= 200 && response.status < 300) {
+      return response.text();
+    } else {
+      return Promise.reject(new Error(response.status + ": " + response.statusText));
     }
+  }
 
   /**
    * Returns the element that has the ID attribute with the specified value.
