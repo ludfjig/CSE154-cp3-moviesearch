@@ -1,9 +1,24 @@
 /* add name fix redundancy */
-
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
+@keyframes Smooth {
+  0% {
+    background-position: 0% 50%
+  }
+
+  50% {
+    background-position: 100% 50%
+  }
+
+  100% {
+    background-position: 0% 50%
+  }
+}
+
 body {
-  background-color: black;
+  background: linear-gradient(222deg, #000000, #848484);
+  background-size: 400% 400%;
+  animation: Smooth 26s ease infinite;
   width: 60%;
   margin-left: auto;
   margin-right: auto;
@@ -39,7 +54,6 @@ img {
   width: 80%;
   height: auto;
   border-radius: 5px;
-
 }
 
 h1, h2 {
