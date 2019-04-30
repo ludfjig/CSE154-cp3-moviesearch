@@ -67,7 +67,7 @@
       title.innerText = movies[i].title;
       desc.innerText = movies[i].overview;
       rating.innerText = "Rating: " + movies[i].vote_average + " (of " + movies[i].vote_count + " total votes";
-      if (movies[i].poster_path != null) {
+      if (movies[i].poster_path != null) { // to avoid a pesky error
         poster.src = POSTER_URL + movies[i].poster_path;
         poster.alt = "Movie poster for " + title;
         movie.appendChild(poster);
@@ -117,9 +117,9 @@
    * @param {string} selector - CSS query selector.
    * @returns {object} The first DOM object matching the query.
    */
-  function qs(selector) {
-    return document.querySelector(selector);
-  }
+    function qs(selector) {
+      return document.querySelector(selector);
+    }
 
   /**
    * Returns the array of elements that match the given CSS selector.
