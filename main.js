@@ -23,7 +23,8 @@
 
   /**
    * Retrieves information from The Movie Database's api and displays it to the user.
-   * Removes all previously displayed movies. Updates the result count.
+   * Removes all previously displayed movies. Updates the result count. Displays
+   * an error message if the fetch goes wrong.
    */
   function search() {
     //removes old movies
@@ -39,7 +40,11 @@
       .then(JSON.parse)
       .then(createMovieCards)
       .then(updateCount)
-      .catch(console.log);
+      .catch(function(){
+        let errorMsg = document.createElement("p");
+        errorMsg.innerText = "OOPS! An error occured when accessing the TMDb API...";
+        qs("article").appendChild(errorMsg);
+      });
   }
 
   /**
