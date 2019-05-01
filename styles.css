@@ -95,6 +95,10 @@ img {
   border-radius: 5px;
 }
 
+span {
+  font-size: 10px;
+}
+
 p {
   padding-left: 20px;
   padding-right: 20px;
