@@ -12,9 +12,6 @@
   const API_KEY = "fc6ca6162c5996649327d4c5d3e46554";
   const POSTER_URL = "https://image.tmdb.org/t/p/original";
 
-  /**
-   *  Add a function that will be called when the window is loaded.
-   */
   window.addEventListener("load", init);
 
   /**
@@ -26,37 +23,33 @@
 
   /**
    * Retrieves information from The Movie Database's api and displays it to the user.
-   * Removes all previously displayed movies.
+   * Removes all previously displayed movies. Updates the result count.
    */
   function search() {
     //removes old movies
-    let section = qs("section");
-    while (section.firstChild) {
-      section.firstChild.remove();
+    let article = qs("article");
+    while (article.firstChild) {
+      article.firstChild.remove();
     }
 
-    //creates new ones
     let url = BASE_URL + "?api_key=" + API_KEY;
     url += "&query=" + qs("input").value;
     fetch(url)
       .then(checkStatus)
       .then(JSON.parse)
       .then(createMovieCards)
-      .then(updateCount);
-    // .catch(function (err){
-    //   console.log("error");
-    //   // fix this
-    // });
+      .then(updateCount)
+      .catch(console.log);
   }
 
   /**
-   * Creates a movie "card" html element for every movie in the given json object,
+   * Creates a "card" html element for every movie in the given json object,
    * and displays them to the user.
-   * @param  {JSON object} myJson - the json object returned from The Movie Database
+   * @param  {JSONobject} jsonResponse - the json object containing movies.
+   * @return {Number} Number of movies in the given JSON object.
    */
   function createMovieCards(jsonResponse) {
     let movies = jsonResponse.results;
-    console.log(movies);
     for (let i = 0; i < movies.length; i++) {
       let movie = document.createElement("div");
       let title = document.createElement("h3");
@@ -66,20 +59,26 @@
 
       title.innerText = movies[i].title;
       desc.innerText = movies[i].overview;
-      rating.innerText = "Rating: " + movies[i].vote_average + " (of " + movies[i].vote_count + " total votes";
+      rating.innerText = "Rating: " + movies[i].vote_average + " (of "
+          + movies[i].vote_count + " total votes";
       if (movies[i].poster_path != null) { // to avoid a pesky error
         poster.src = POSTER_URL + movies[i].poster_path;
-        poster.alt = "Movie poster for " + title;
+        poster.alt = "Movie poster for " + movies[i].title;
         movie.appendChild(poster);
       }
       movie.appendChild(title);
       movie.appendChild(rating);
       movie.appendChild(desc);
-      qs("section").appendChild(movie);
+      qs("article").appendChild(movie);
     }
     return movies.length;
   }
 
+  /**
+   * Sets the text of the "results" heading to be equal to the number of movies
+   * in the fetch response.
+   * @param  {Number} n - the number of movies in the fetch result.
+   */
   function updateCount(n) {
     qs("h2").innerText = "Results: " + n;
   }
@@ -104,30 +103,11 @@
   }
 
   /**
-   * Returns the element that has the ID attribute with the specified value.
-   * @param {string} idName - element ID
-   * @returns {object} DOM object associated with id.
-   */
-  function id(idName) {
-    return document.getElementById(idName);
-  }
-
-  /**
    * Returns the first element that matches the given CSS selector.
    * @param {string} selector - CSS query selector.
    * @returns {object} The first DOM object matching the query.
    */
-    function qs(selector) {
-      return document.querySelector(selector);
-    }
-
-  /**
-   * Returns the array of elements that match the given CSS selector.
-   * @param {string} selector - CSS query selector
-   * @returns {object[]} array of DOM objects matching the query.
-   */
-  function qsa(selector) {
-    return document.querySelectorAll(selector);
+  function qs(selector) {
+    return document.querySelector(selector);
   }
-
 })();

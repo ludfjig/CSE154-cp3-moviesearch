@@ -6,7 +6,7 @@
 
      On this website, the user can search for different movies, and will get
      shown results in the form of a "card" element for each result movie. Each
-     card contains a movie poster, the title, and the description. 
+     card contains a movie poster, the title, and the description.
 -->
 
 <html lang="en-us">
@@ -21,18 +21,19 @@
 <body>
   <header>
     <h1>Search for movies!</h1>
-    <nav>
-      <article>
+    <section>
+      <div> <!--This div is not redundant. It makes the button and text appear
+              next to each other. There is no fitting semantic tag-->
         <label>Search for a movie:
           <input type="text" name="title" placeholder="Enter a movie title" />
         </label>
         <button type="button">Search!</button>
-      </article>
-    </nav>
+      </div>
+    </section>
   </header>
   <main>
     <h2>Results:</h2>
-    <section></section>
+    <article></article>
   </main>
 </body>
 

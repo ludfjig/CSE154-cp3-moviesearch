@@ -1,4 +1,10 @@
-/* add name fix redundancy */
+/*  Name: Ludvig Liljenberg
+    Date: 04/30/2019
+    Section: CSE 154AF
+
+    This stylesheet styles the index.html page. It gives it an animated dark
+    grandient background, with most elements having a white borer. */
+
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 
 @keyframes Smooth {
@@ -17,12 +23,12 @@
 
 body {
   background: linear-gradient(222deg, #000000, #848484);
-  background-size: 400% 400%;
+  background-size: 300% 300%;
   animation: Smooth 26s ease infinite;
   width: 60%;
   margin-left: auto;
   margin-right: auto;
-  color: white;
+  background-attachment: fixed;
 }
 
 body, button, input {
@@ -33,50 +39,35 @@ body, button {
   color: white;
 }
 
-section {
+main div, section, article {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
 }
 
-div {
-  width: 200px;
-  padding: 10px;
-  background-color: gray;
-  margin: 10px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-img {
-  width: 80%;
-  height: auto;
-  border-radius: 5px;
-}
-
-/* h1, h2, h3, h4 {
-  text-align: center;
-} */
-
-section {
-  margin-top: 50px;
-}
-
-nav {
-  background-color: gray;
-  height: 50px;
-  ;
-  padding: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-nav, div {
+section, main div {
   border: 5px solid white;
   border-radius: 10px;
+  background-color: gray;
+  align-items: center;
+}
+
+article {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+main div {
+  width: 200px;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  flex-direction: column;
+}
+
+section {
+  height: 50px;
+  padding: 30px;
+  justify-content: space-around;
 }
 
 h3 {
@@ -96,6 +87,12 @@ button {
 
 button:active {
   background-color: #ffb2b2;
+}
+
+img {
+  width: 80%;
+  height: auto;
+  border-radius: 5px;
 }
 
 p {
